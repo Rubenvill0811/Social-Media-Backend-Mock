@@ -3,10 +3,10 @@ const {Schema, Types} = require('mongoose');
 
 const thoughtSchema = new Schema(
     {
-        // thoughtId: {
-        //     type: Schema.Types.ObjectId,
-        //     default: () => new Types.ObjectId(),
-        // },
+        thoughtId: {
+            type: Schema.Types.ObjectId,
+            default: () => new Types.ObjectId(),
+        },
         title: {
             type: String,
             required: true
