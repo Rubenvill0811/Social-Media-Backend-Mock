@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Comment = require('../models/Comment');
 const { Schema, Types } = mongoose;
 
 const thoughtSchema = new Schema(
@@ -27,10 +28,7 @@ const thoughtSchema = new Schema(
             default: Date.now
         },
         comments: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Comment',
-            }
+            Comment
         ],
     },
 );

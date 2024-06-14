@@ -42,4 +42,18 @@ router.post('/', async (req, res) => {
 
 });
 
+router.post('/:thoughtId/comments', async (req, res) => {
+    try {
+        const newComment = await Thought.findOneAndUpdate(
+            {_id: req.params.thoughtId},
+            {$addToSet: {comments: req.body}},
+            { new: true}
+        );
+        res.json(newComment);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

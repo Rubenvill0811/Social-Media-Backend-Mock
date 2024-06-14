@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+
 const {Schema, Types} = require('mongoose');
 
 const commentSchema = new Schema(
@@ -13,7 +13,7 @@ const commentSchema = new Schema(
             minlength: 1,
             maxlength: 280,
         },
-        post: {
+        thought: {
             type: Schema.Types.ObjectId,
             ref: 'Thought'
         },
@@ -26,8 +26,10 @@ const commentSchema = new Schema(
             default: Date.now
         },
     },
+    {
+        toJSON: {getters: true},
+        id: false,
+    }
 );
 
-const Comment = mongoose.model('Comment', commentSchema);
-
-module.exports = Comment;
+module.exports = commentSchema;

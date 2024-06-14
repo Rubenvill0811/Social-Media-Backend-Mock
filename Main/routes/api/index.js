@@ -4,6 +4,7 @@ const userRoutes = require('./userRoutes');
 const createUser = require('./createUser')
 
 
+
 router.use('/thoughts', thoughtRoute);
 router.use('/users', userRoutes);
 router.use('/createUserProfile', createUser)
