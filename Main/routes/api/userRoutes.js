@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../../models/User');
+const Thought = require('../../models/Thought');
 
 // Gets users
 
@@ -62,9 +63,30 @@ router.get('/:userId/friends', async (req, res) => {
     }
 });
 
+// Deletes a friend from your friends list.
+
 router.delete('/:userId/friends', async (req, res) => {
     const deletedFriend = req.params.userId;
-    res.send(`Friend with userId ${deletedFriend} has been removed from your friend list.`)
-})
+    res.send(`Friend with userId ${deletedFriend} has been removed from your friends.`)
+});
+
+// Deletes a user and all of their posts.
+
+router.delete('/:userId', async (req , res) => {
+    try {
+
+        const deletedUser = req.params.userId;
+        await User.findByIdAndDelete(deletedUser);
+        await Thought.deleteMany({userId: deletedUser});
+        
+        res.status(200).json({
+            message: `The user with the ID of ${deletedUser} and all of their content has been removed.`
+        })
+    
+    } catch (err) {
+
+        res.status(500).json(err)
+    }
+});
 
 module.exports = router;
