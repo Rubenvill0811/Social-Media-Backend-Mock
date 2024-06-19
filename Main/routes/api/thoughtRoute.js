@@ -17,9 +17,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:thoughtId', async (req, res) => {
     try {
-        const thought = Thought.findOne({
-            _id: req.params.thoughtId
-        });
+        const id = req.params.thoughtId;
+        const thought = await Thought.findById(id);
         if (!thought) {
             return res.status(404).json({message: 'No thought with that ID'})
         }
